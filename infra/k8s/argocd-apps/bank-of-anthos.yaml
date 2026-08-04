@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bank-of-anthos
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/iamay0bami/bank-of-anthos.git
+    targetRevision: main
+    path: kubernetes-manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  ignoreDifferences:
+    - group: apps
+      kind: StatefulSet
+      name: accounts-db
+      jsonPointers:
+        - /spec/template/spec/serviceAccount
+    - group: apps
+      kind: StatefulSet
+      name: ledger-db
+      jsonPointers:
+        - /spec/template/spec/serviceAccount
