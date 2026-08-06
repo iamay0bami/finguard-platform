@@ -17,4 +17,13 @@ This project runs a fork of Bank of Anthos as its transaction-processing
 core: https://github.com/iamay0bami/bank-of-anthos
 
 ## Status
-🚧 Actively being built. See `docs/` for milestone write-ups as they land.
+## Completed milestones
+- Bank of Anthos deployed on self-managed `kind` cluster (AWS EC2)
+- GitOps-managed via Argo CD
+- Istio service mesh with enforced mutual TLS (STRICT mode)
+
+## In progress
+- Policy-as-code (OPA/Gatekeeper)
+- Secrets management (Vault)
+
+See `docs/` for detailed incident write-ups and milestone notes.
