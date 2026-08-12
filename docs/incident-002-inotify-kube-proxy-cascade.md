@@ -66,3 +66,14 @@ confirmed system health at every other layer.
   case) are a summary, not ground truth — always verify against the
   underlying primitives (`kubectl rollout status`, pod conditions, direct
   application testing) before trusting or chasing a UI status.
+
+## Addendum (2026-08-12)
+A separate, unrelated issue was found on `argocd-applicationset-controller`:
+missing `ApplicationSet` CRD causing continuous CrashLoopBackOff (112+
+restarts) since initial install. Since this project uses a single
+manually-defined Argo CD Application and has no current need for
+ApplicationSet's templated multi-app generation, the component was
+deliberately scaled to zero rather than remediated, to eliminate
+unnecessary restart churn on a resource-constrained instance. Can be
+re-enabled by installing the ApplicationSet CRDs and scaling back up if
+templated application generation becomes needed later in the project.
